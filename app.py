@@ -20,15 +20,11 @@ def restos():
 
 @app.route('/api/restos/', methods=['GET'])
 def api_q():
-    # Check if an ID was provided as part of the URL.
-    # If ID is provided, assign it to a variable.
-    # If no ID is provided, display an error in the browser.
     if 'q' in request.args:
         q = request.args['q']
     else:
         return "Error: No id field provided. Please specify an id."
 
-    # Create an empty list for our results
     if request.method == "GET":
         response = api.get(f"""area[name="{q}"]; node["amenity"="restaurant"](area);out;""")
         return jsonify(response)
